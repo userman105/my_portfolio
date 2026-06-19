@@ -1,0 +1,1 @@
+ D:\\projects\\portfolio\\build\\web\\_redirects:  D:\\projects\\portfolio\\web\\index.html D:\\projects\\portfolio\\web\\_redirects

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="Flutter Developer Portfolio — ChroniCare & CDL A to Z">
+  <meta name="keywords" content="Flutter, Mobile Developer, Portfolio, ChroniCare, CDL">
+  <meta name="author" content="Your Name">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Your Name — Flutter Developer">
+  <meta property="og:description" content="Building cross-platform experiences that solve real problems.">
+  <meta property="og:type" content="website">
+
+  <!-- iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Portfolio">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <title>Your Name — Flutter Developer</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #062B6E;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* ── Full-screen Aero loader ─────────────────────────────── */
+    #aero-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      overflow: hidden;
+      /* The Vista blue sky gradient — animates between two states */
+      background: linear-gradient(135deg, #041D52, #0D3B8C, #1A5FB4, #2470B8, #1251A3, #062B6E);
+      background-size: 400% 400%;
+      animation: aeroSky 5s ease infinite;
+    }
+
+    /* Slow sweeping gradient — like the Vista Aurora wallpaper in motion */
+    @keyframes aeroSky {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Orb 1 — large cyan-blue aurora blob, top-left drift */
+    .aero-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+    }
+    .orb-1 {
+      width: 60vw; height: 60vw;
+      max-width: 700px; max-height: 700px;
+      background: radial-gradient(circle, rgba(116,192,252,0.18) 0%, transparent 70%);
+      top: -10%; left: -5%;
+      animation: orbDrift1 8s ease-in-out infinite alternate;
+    }
+    .orb-2 {
+      width: 50vw; height: 50vw;
+      max-width: 600px; max-height: 600px;
+      background: radial-gradient(circle, rgba(30,80,180,0.22) 0%, transparent 70%);
+      bottom: -10%; right: -5%;
+      animation: orbDrift2 10s ease-in-out infinite alternate;
+    }
+    .orb-3 {
+      width: 40vw; height: 40vw;
+      max-width: 500px; max-height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+      top: 30%; left: 40%;
+      animation: orbDrift3 7s ease-in-out infinite alternate;
+    }
+
+    @keyframes orbDrift1 {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(5vw, 3vh) scale(1.1); }
+    }
+    @keyframes orbDrift2 {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(-4vw, -4vh) scale(1.08); }
+    }
+    @keyframes orbDrift3 {
+      from { transform: translate(0, 0) scale(0.95); }
+      to   { transform: translate(-3vw, 5vh) scale(1.05); }
+    }
+
+    /* ── Glass panel containing logo + bar ───────────────────── */
+    .loader-glass {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      padding: 40px 56px;
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.22) 0%,
+        rgba(255,255,255,0.10) 50%,
+        rgba(30,80,160,0.12) 100%
+      );
+      border-radius: 16px;
+      border: 0.5px solid rgba(255,255,255,0.45);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      box-shadow:
+        0 8px 32px rgba(0,0,68,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    /* Bright top-edge shine — the core Aero signature */
+    .loader-glass::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95), transparent);
+      border-radius: 50%;
+    }
+
+    .loader-name {
+      font-size: 28px;
+      font-weight: 300;
+      color: #fff;
+      letter-spacing: -0.5px;
+      text-shadow:
+        0 0 30px rgba(255,255,255,0.6),
+        0 2px 8px rgba(0,0,68,0.5);
+    }
+
+    .loader-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(116,192,252,0.9);
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(116,192,252,0.5);
+      margin-top: -18px;
+    }
+
+    /* ── Animated progress bar ───────────────────────────────── */
+    .loader-bar-wrap {
+      width: 200px;
+      height: 3px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 3px;
+      overflow: hidden;
+      border: 0.5px solid rgba(255,255,255,0.20);
+      position: relative;
+    }
+
+    .loader-bar-fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 40%;
+      border-radius: 3px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(116,192,252,0.6),
+        #74C0FC,
+        rgba(255,255,255,0.9),
+        #74C0FC,
+        rgba(116,192,252,0.6),
+        transparent
+      );
+      animation: barSweep 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes barSweep {
+      0%   { transform: translateX(-250%); }
+      100% { transform: translateX(500%); }
+    }
+
+    /* Fade-out transition */
+    #aero-loader.fade-out {
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Aero Glass Loader -->
+  <div id="aero-loader">
+    <div class="aero-orb orb-1"></div>
+    <div class="aero-orb orb-2"></div>
+    <div class="aero-orb orb-3"></div>
+
+    <div class="loader-glass">
+      <div class="loader-name">Omar Hammed</div>
+      <div class="loader-title">Junior Flutter Developer</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      const loader = document.getElementById('aero-loader');
+      if (loader) {
+        loader.classList.add('fade-out');
+        setTimeout(() => {
+          loader.remove();
+          document.body.style.overflow = 'auto';
+        }, 750);
+      }
+    });
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
