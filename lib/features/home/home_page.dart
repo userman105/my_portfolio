@@ -110,6 +110,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
+                  const _CertificatesSection(),
+
                   _AeroFooter(),
                 ],
               ),
@@ -264,6 +266,139 @@ class _FooterIconState extends State<_FooterIcon> {
                     ),
                   ),
                 ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CertificatesSection extends StatelessWidget {
+  const _CertificatesSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 700;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 32,
+        vertical: 64,
+      ),
+      child: Column(
+        children: [
+          Text(
+            'CERTIFICATIONS',
+            style: GoogleFonts.inter(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 3,
+              color: Colors.white.withOpacity(0.55),
+            ),
+          ),
+
+          const SizedBox(height: 18),
+
+          Text(
+            'Digital Egypt Pioneers Initiative (DEPI)',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.inter(
+              fontSize: 24,
+              fontWeight: FontWeight.w300,
+              color: Colors.white,
+            ),
+          ),
+
+          const SizedBox(height: 40),
+
+          isMobile
+              ? Column(
+            children: const [
+              _CertificateCard(
+                imagePath:
+                'assets/images/certificates/DEPI.png',
+              ),
+              SizedBox(height: 24),
+              _CertificateCard(
+                imagePath:
+                'assets/images/certificates/DEPIenglish.png',
+              ),
+            ],
+          )
+              : Row(
+            children: const [
+              Expanded(
+                child: _CertificateCard(
+                  imagePath:
+                  'assets/images/certificates/DEPI.png',
+                ),
+              ),
+              SizedBox(width: 24),
+              Expanded(
+                child: _CertificateCard(
+                  imagePath:
+                  'assets/images/certificates/DEPIenglish.png',
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CertificateCard extends StatefulWidget {
+  final String imagePath;
+
+  const _CertificateCard({
+    required this.imagePath,
+  });
+
+  @override
+  State<_CertificateCard> createState() => _CertificateCardState();
+}
+
+class _CertificateCardState extends State<_CertificateCard> {
+  bool hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => hovered = true),
+      onExit: (_) => setState(() => hovered = false),
+      child: AnimatedScale(
+        scale: hovered ? 1.02 : 1,
+        duration: const Duration(milliseconds: 180),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 20,
+              sigmaY: 20,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.white.withOpacity(0.18),
+                    Colors.white.withOpacity(0.08),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.3),
+                  width: 0.5,
+                ),
+              ),
+              padding: const EdgeInsets.all(12),
+              child: Image.asset(
+                widget.imagePath,
+                fit: BoxFit.contain,
               ),
             ),
           ),
