@@ -27,7 +27,7 @@ class PortfolioRepository {
       TechChipData(label: 'Node.js', color: const Color(0xFF339933)),
       TechChipData(label: 'Express', color: const Color(0xFF404040)),
       TechChipData(label: 'Prisma', color: const Color(0xFF1A202C)),
-      TechChipData(label: 'MongoDB', color: const Color(0xFF47A248)),
+      TechChipData(label: 'PostgreSQL', color: const Color(0xFF47A248)),
       TechChipData(label: 'BLoC', color: const Color(0xFF8B5CF6)),
       TechChipData(label: 'Dio', color: const Color(0xFFE11D48)),
       TechChipData(label: 'PDF Gen', color: const Color(0xFFDC2626)),
