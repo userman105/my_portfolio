@@ -68953,10 +68953,10 @@ I(a){var s=this.e
 return A.fL(A.c([A.ko(this.c,A.T(217,s.m()>>>16&255,s.m()>>>8&255,s.m()&255),null,17),B.wr,A.bk(this.d,null,A.cR().$5$color$fontSize$fontWeight$letterSpacing$shadows(B.d,18,B.G,-0.2,A.c([B.aI],t.q)),null)],t.D),B.ab,B.F,B.H)}}
 A.EF.prototype={
 I(a){var s,r,q,p,o,n,m,l,k,j=null,i=6e5,h=t.w,g=A.bn(a,j,h).w.a.b,f=A.bn(a,j,h).w,e=A.bn(a,j,h).w.a.a<600,d=A.awI(a)
-h=e?g*0.22:g*0.3
+h=e?g*0.38:g*0.48
 s=e?0.055:0.075
-h=A.ep(0,A.kq(A.alD(A.tC(new A.hM(B.a5,j,0.42,A.WJ(u.X,B.a5,j,B.eN,B.jZ,j,j,f.a.a),j),B.Z),s),!0,j),h,j,0,0,j,j)
-f=e?g*0.28:g*0.36
+h=A.ep(0,A.kq(A.alD(A.tC(new A.hM(B.a5,j,0.78,A.WJ(u.X,B.a5,j,B.eN,B.jZ,j,j,f.a.a),j),B.Z),s),!0,j),h,j,0,0,j,j)
+f=e?g*0.4:g*0.5
 f=A.ep(0,A.kq(A.DB(j,new A.b6(j,j,j,j,j,new A.bS(B.aj,B.a5,B.N,A.c([B.x,A.T(31,B.l.m()>>>16&255,B.l.m()>>>8&255,B.l.m()&255)],t.W),j,j),B.z),B.dk),!0,j),f,j,0,0,j,j)
 s=A.a2o(a)
 r=A.Ia(A.cZ(A.cU(A.j1(A.bJ(100),A.bk("Full Stack Flutter Developer".toUpperCase(),j,A.lR(),j),j,B.Bt)),j,A.aN(i,0)),-0.15,B.kZ,0)

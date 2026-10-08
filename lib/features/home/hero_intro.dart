@@ -37,7 +37,7 @@ class HeroIntroSection extends StatelessWidget {
                 child: ClipRect(
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    heightFactor: 0.78,
+                    heightFactor: 1.48,
                     child: Image.asset(
                       'assets/images/certificates/BachelorsDegree.png',
                       width: w,
