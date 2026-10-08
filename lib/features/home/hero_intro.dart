@@ -23,10 +23,6 @@ class HeroIntroSection extends StatelessWidget {
       height: h * 0.82,
       child: Stack(
         children: [
-          // Bachelor degree background.
-          //
-          // Only the lower portion is visible.
-          // The image is intentionally very transparent.
           Positioned(
             left: 0,
             right: 0,
@@ -42,7 +38,7 @@ class HeroIntroSection extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     heightFactor: 0.42,
                     child: Image.asset(
-                      'assets/images/certificates/BachelorDegree.png',
+                      'assets/images/certificates/BachelorsDegree.png',
                       width: w,
                       fit: BoxFit.cover,
                       alignment: Alignment.bottomCenter,

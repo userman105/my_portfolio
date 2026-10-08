@@ -164,7 +164,7 @@ class _AeroFooter extends StatelessWidget {
             ),
             border: Border(
               top: BorderSide(
-                color: Colors.white.withOpacity(0.55),
+                color: Colors.white.withValues(alpha : 0.55),
                 width: 1,
               ),
             ),
@@ -196,7 +196,7 @@ class _AeroFooter extends StatelessWidget {
                 '© 2026 · Built with Flutter Web',
                 style: GoogleFonts.inter(
                   fontSize: 11,
-                  color: Colors.white.withOpacity(0.4),
+                  color: Colors.white.withValues(alpha : 0.55),
                   letterSpacing: 0.5,
                 ),
               ),
@@ -253,19 +253,13 @@ class _FooterIconState extends State<_FooterIcon> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Colors.white.withOpacity(
-                        _hovered ? 0.45 : 0.25,
-                      ),
-                      Colors.white.withOpacity(
-                        _hovered ? 0.25 : 0.10,
-                      ),
+                      Colors.white.withValues(alpha : 0.55),
+                      Colors.white.withValues(alpha : 0.55),
                     ],
                   ),
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Colors.white.withOpacity(
-                      _hovered ? 0.8 : 0.4,
-                    ),
+                    color: Colors.white.withValues(alpha : 0.55),
                     width: 0.5,
                   ),
                   boxShadow: _hovered
@@ -312,7 +306,7 @@ class _CertificatesSectionState extends State<_CertificatesSection> {
   int _currentPage = 0;
 
   final List<String> _certificates = const [
-    'assets/images/certificates/BachelorDegree.png',
+    'assets/images/certificates/BachelorsDegree.png',
     'assets/images/certificates/DEPI.png',
     'assets/images/certificates/DEPIenglish.png',
 
@@ -360,7 +354,7 @@ class _CertificatesSectionState extends State<_CertificatesSection> {
               fontSize: 11,
               fontWeight: FontWeight.w600,
               letterSpacing: 3,
-              color: Colors.white.withOpacity(0.55),
+              color: Colors.white.withValues(alpha : 0.55),
             ),
           ),
 
@@ -384,7 +378,7 @@ class _CertificatesSectionState extends State<_CertificatesSection> {
             style: GoogleFonts.inter(
               fontSize: 13,
               fontWeight: FontWeight.w300,
-              color: Colors.white.withOpacity(0.45),
+              color: Colors.white.withValues(alpha : 0.55),
             ),
           ),
 
@@ -474,7 +468,7 @@ class _CertificatesSectionState extends State<_CertificatesSection> {
               fontSize: 10,
               fontWeight: FontWeight.w500,
               letterSpacing: 2,
-              color: Colors.white.withOpacity(0.35),
+              color: Colors.white.withValues(alpha : 0.55),
             ),
           ),
         ],
