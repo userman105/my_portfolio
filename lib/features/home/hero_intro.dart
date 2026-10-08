@@ -23,20 +23,21 @@ class HeroIntroSection extends StatelessWidget {
       height: h * 0.82,
       child: Stack(
         children: [
+          // Bachelor's degree background.
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
             height: isMobile
-                ? h * 0.22
-                : h * 0.30,
+                ? h * 0.38
+                : h * 0.48,
             child: IgnorePointer(
               child: Opacity(
                 opacity: isMobile ? 0.055 : 0.075,
                 child: ClipRect(
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    heightFactor: 0.42,
+                    heightFactor: 0.78,
                     child: Image.asset(
                       'assets/images/certificates/BachelorsDegree.png',
                       width: w,
@@ -56,8 +57,8 @@ class HeroIntroSection extends StatelessWidget {
             right: 0,
             bottom: 0,
             height: isMobile
-                ? h * 0.28
-                : h * 0.36,
+                ? h * 0.40
+                : h * 0.50,
             child: IgnorePointer(
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -200,13 +201,11 @@ class HeroIntroSection extends StatelessWidget {
   }
 }
 
-
 class _AeroScrollIndicator extends StatefulWidget {
   @override
   State<_AeroScrollIndicator> createState() =>
       _AeroScrollIndicatorState();
 }
-
 
 class _AeroScrollIndicatorState
     extends State<_AeroScrollIndicator>
