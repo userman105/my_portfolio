@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui';
+
 import '../../core/constants/assets.dart';
 import '../../core/constants/links.dart';
 import '../../core/theme/colors.dart';
@@ -12,7 +13,6 @@ import '../projects/project_section.dart';
 import '../projects/widgets/project_card.dart';
 import 'hero_intro.dart';
 import 'portfolio_nav.dart';
-import 'dart:async';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,8 +23,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
+
   final GlobalKey _chronicareKey = GlobalKey();
   final GlobalKey _cdlKey = GlobalKey();
+
   final _projects = PortfolioRepository.getProjects();
 
   bool _autoScrolled = false;
@@ -76,54 +78,57 @@ class _HomePageState extends State<HomePage> {
         chronicareKey: _chronicareKey,
         cdlKey: _cdlKey,
       ),
-        body: AeroBackground(
-          accentColor: AppColors.chronicareAccent,
-          child: NotificationListener<UserScrollNotification>(
-            onNotification: (notification) {
-              _autoScrolled = true;
-              return false;
-            },
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(height: 56),
-                  const HeroIntroSection(),
+      body: AeroBackground(
+        accentColor: AppColors.chronicareAccent,
+        child: NotificationListener<UserScrollNotification>(
+          onNotification: (notification) {
+            _autoScrolled = true;
+            return false;
+          },
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 56),
 
-                  KeyedSubtree(
-                    key: _chronicareKey,
-                    child: FeaturedProjectSection(project: chronicare),
+                const HeroIntroSection(),
+
+                KeyedSubtree(
+                  key: _chronicareKey,
+                  child: FeaturedProjectSection(
+                    project: chronicare,
                   ),
+                ),
 
-                  ProjectTransitionDivider(
-                    fromAccent: chronicare.accentColor,
-                    toAccent: cdlaz.accentColor,
-                    nextProjectTitle: cdlaz.title,
+                ProjectTransitionDivider(
+                  fromAccent: chronicare.accentColor,
+                  toAccent: cdlaz.accentColor,
+                  nextProjectTitle: cdlaz.title,
+                ),
+
+                KeyedSubtree(
+                  key: _cdlKey,
+                  child: ProjectCard(
+                    project: cdlaz,
+                    sectionLabel: 'CDL A to Z',
                   ),
+                ),
 
-                  KeyedSubtree(
-                    key: _cdlKey,
-                    child: ProjectCard(
-                      project: cdlaz,
-                      sectionLabel: 'CDL A to Z',
-                    ),
-                  ),
+                const _CertificatesSection(),
 
-                  const _CertificatesSection(),
-
-                  _AeroFooter(),
-                ],
-              ),
+                _AeroFooter(),
+              ],
             ),
           ),
         ),
+      ),
     );
   }
 }
 
-class _AeroFooter extends StatelessWidget {
 
+class _AeroFooter extends StatelessWidget {
   Future<void> _openLink(String url) async {
     final Uri uri = Uri.parse(url);
 
@@ -134,44 +139,59 @@ class _AeroFooter extends StatelessWidget {
       );
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return ClipRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+        filter: ImageFilter.blur(
+          sigmaX: 30,
+          sigmaY: 30,
+        ),
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 32),
+          padding: const EdgeInsets.symmetric(
+            vertical: 40,
+            horizontal: 32,
+          ),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Color(0x22FFFFFF), Color(0x33FFFFFF)],
+              colors: [
+                Color(0x22FFFFFF),
+                Color(0x33FFFFFF),
+              ],
             ),
             border: Border(
-              top: BorderSide(color: Colors.white.withOpacity(0.55), width: 1),
+              top: BorderSide(
+                color: Colors.white.withOpacity(0.55),
+                width: 1,
+              ),
             ),
           ),
           child: Column(
-            children: [Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _FooterIcon(
-                  image: AppAssets.github,
-                  tooltip: 'GitHub',
-                  onTap: () => _openLink(AppLinks.github),
-                ),
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _FooterIcon(
+                    image: AppAssets.github,
+                    tooltip: 'GitHub',
+                    onTap: () => _openLink(AppLinks.github),
+                  ),
 
-                const SizedBox(width: 14),
+                  const SizedBox(width: 14),
 
-                _FooterIcon(
-                  image: AppAssets.linkedin,
-                  tooltip: 'LinkedIn',
-                  onTap: () => _openLink(AppLinks.linkedin),
-                ),
-              ],
-            ),
+                  _FooterIcon(
+                    image: AppAssets.linkedin,
+                    tooltip: 'LinkedIn',
+                    onTap: () => _openLink(AppLinks.linkedin),
+                  ),
+                ],
+              ),
+
               const SizedBox(height: 16),
+
               Text(
                 '© 2026 · Built with Flutter Web',
                 style: GoogleFonts.inter(
@@ -202,6 +222,7 @@ class _FooterIcon extends StatefulWidget {
   @override
   State<_FooterIcon> createState() => _FooterIconState();
 }
+
 
 class _FooterIconState extends State<_FooterIcon> {
   bool _hovered = false;
@@ -275,17 +296,60 @@ class _FooterIconState extends State<_FooterIcon> {
   }
 }
 
-class _CertificatesSection extends StatelessWidget {
+
+class _CertificatesSection extends StatefulWidget {
   const _CertificatesSection();
 
   @override
+  State<_CertificatesSection> createState() =>
+      _CertificatesSectionState();
+}
+
+
+class _CertificatesSectionState extends State<_CertificatesSection> {
+  final PageController _pageController = PageController();
+
+  int _currentPage = 0;
+
+  final List<String> _certificates = const [
+    'assets/images/certificates/DEPI.png',
+    'assets/images/certificates/DEPIenglish.png',
+    'assets/images/certificates/BachelorDegree.png',
+  ];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _previous() {
+    if (_currentPage <= 0) return;
+
+    _pageController.previousPage(
+      duration: const Duration(milliseconds: 450),
+      curve: Curves.easeOutCubic,
+    );
+  }
+
+  void _next() {
+    if (_currentPage >= _certificates.length - 1) return;
+
+    _pageController.nextPage(
+      duration: const Duration(milliseconds: 450),
+      curve: Curves.easeOutCubic,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 700;
+    final size = MediaQuery.of(context).size;
+    final isMobile = size.width < 700;
 
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 32,
-        vertical: 64,
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 20 : 48,
+        vertical: isMobile ? 56 : 80,
       ),
       child: Column(
         children: [
@@ -302,47 +366,115 @@ class _CertificatesSection extends StatelessWidget {
           const SizedBox(height: 18),
 
           Text(
-            'Digital Egypt Pioneers Initiative (DEPI)',
+            'Professional Credentials',
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-              fontSize: 24,
+              fontSize: isMobile ? 22 : 28,
               fontWeight: FontWeight.w300,
               color: Colors.white,
             ),
           ),
 
-          const SizedBox(height: 40),
+          const SizedBox(height: 10),
 
-          isMobile
-              ? Column(
-            children: const [
-              _CertificateCard(
-                imagePath:
-                'assets/images/certificates/DEPI.png',
-              ),
-              SizedBox(height: 24),
-              _CertificateCard(
-                imagePath:
-                'assets/images/certificates/DEPIenglish.png',
-              ),
-            ],
-          )
-              : Row(
-            children: const [
-              Expanded(
-                child: _CertificateCard(
-                  imagePath:
-                  'assets/images/certificates/DEPI.png',
-                ),
-              ),
-              SizedBox(width: 24),
-              Expanded(
-                child: _CertificateCard(
-                  imagePath:
-                  'assets/images/certificates/DEPIenglish.png',
-                ),
-              ),
-            ],
+          Text(
+            'Certifications, training, and academic achievements.',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.inter(
+              fontSize: 13,
+              fontWeight: FontWeight.w300,
+              color: Colors.white.withOpacity(0.45),
+            ),
+          ),
+
+          const SizedBox(height: 36),
+
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final cardHeight = isMobile
+                  ? size.height * 0.55
+                  : size.height * 0.72;
+
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(
+                    width: constraints.maxWidth,
+                    height: cardHeight,
+                    child: PageView.builder(
+                      controller: _pageController,
+                      itemCount: _certificates.length,
+                      onPageChanged: (index) {
+                        setState(() {
+                          _currentPage = index;
+                        });
+                      },
+                      itemBuilder: (context, index) {
+                        return _CertificateCard(
+                          imagePath: _certificates[index],
+                        );
+                      },
+                    ),
+                  ),
+
+                  Positioned(
+                    left: isMobile ? 8 : 18,
+                    child: _CarouselButton(
+                      icon: Icons.arrow_back_ios_new_rounded,
+                      enabled: _currentPage > 0,
+                      onTap: _previous,
+                    ),
+                  ),
+
+                  Positioned(
+                    right: isMobile ? 8 : 18,
+                    child: _CarouselButton(
+                      icon: Icons.arrow_forward_ios_rounded,
+                      enabled: _currentPage <
+                          _certificates.length - 1,
+                      onTap: _next,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+
+          const SizedBox(height: 22),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              _certificates.length,
+                  (index) {
+                final selected = index == _currentPage;
+
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  width: selected ? 24 : 7,
+                  height: 7,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white.withOpacity(
+                      selected ? 0.8 : 0.25,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+
+          const SizedBox(height: 12),
+
+          Text(
+            '${_currentPage + 1} / ${_certificates.length}',
+            style: GoogleFonts.inter(
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 2,
+              color: Colors.white.withOpacity(0.35),
+            ),
           ),
         ],
       ),
@@ -361,6 +493,7 @@ class _CertificateCard extends StatefulWidget {
   State<_CertificateCard> createState() => _CertificateCardState();
 }
 
+
 class _CertificateCardState extends State<_CertificateCard> {
   bool hovered = false;
 
@@ -370,35 +503,59 @@ class _CertificateCardState extends State<_CertificateCard> {
       onEnter: (_) => setState(() => hovered = true),
       onExit: (_) => setState(() => hovered = false),
       child: AnimatedScale(
-        scale: hovered ? 1.02 : 1,
-        duration: const Duration(milliseconds: 180),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 20,
-              sigmaY: 20,
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.white.withOpacity(0.18),
-                    Colors.white.withOpacity(0.08),
+        scale: hovered ? 1.005 : 1.0,
+        duration: const Duration(milliseconds: 220),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 4,
+            vertical: 4,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(26),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 25,
+                sigmaY: 25,
+              ),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 220),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.white.withOpacity(
+                        hovered ? 0.20 : 0.14,
+                      ),
+                      Colors.white.withOpacity(
+                        hovered ? 0.10 : 0.06,
+                      ),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(26),
+                  border: Border.all(
+                    color: Colors.white.withOpacity(
+                      hovered ? 0.42 : 0.24,
+                    ),
+                    width: 0.7,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.18),
+                      blurRadius: 35,
+                      offset: const Offset(0, 18),
+                    ),
                   ],
                 ),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.white.withOpacity(0.3),
-                  width: 0.5,
+                padding: const EdgeInsets.all(18),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    widget.imagePath,
+                    fit: BoxFit.contain,
+                    filterQuality: FilterQuality.high,
+                  ),
                 ),
-              ),
-              padding: const EdgeInsets.all(12),
-              child: Image.asset(
-                widget.imagePath,
-                fit: BoxFit.contain,
               ),
             ),
           ),
@@ -407,3 +564,74 @@ class _CertificateCardState extends State<_CertificateCard> {
     );
   }
 }
+
+
+
+class _CarouselButton extends StatefulWidget {
+  final IconData icon;
+  final bool enabled;
+  final VoidCallback onTap;
+
+  const _CarouselButton({
+    required this.icon,
+    required this.enabled,
+    required this.onTap,
+  });
+
+  @override
+  State<_CarouselButton> createState() => _CarouselButtonState();
+}
+
+
+class _CarouselButtonState extends State<_CarouselButton> {
+  bool hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: widget.enabled
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
+      onEnter: (_) => setState(() => hovered = true),
+      onExit: (_) => setState(() => hovered = false),
+      child: GestureDetector(
+        onTap: widget.enabled ? widget.onTap : null,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          width: 46,
+          height: 46,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white.withOpacity(
+              widget.enabled
+                  ? (hovered ? 0.22 : 0.10)
+                  : 0.04,
+            ),
+            border: Border.all(
+              color: Colors.white.withOpacity(
+                widget.enabled ? 0.30 : 0.10,
+              ),
+              width: 0.7,
+            ),
+            boxShadow: hovered && widget.enabled
+                ? [
+              BoxShadow(
+                color: Colors.white.withOpacity(0.10),
+                blurRadius: 18,
+              ),
+            ]
+                : [],
+          ),
+          child: Icon(
+            widget.icon,
+            size: 16,
+            color: Colors.white.withOpacity(
+              widget.enabled ? 0.8 : 0.2,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+

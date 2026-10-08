@@ -1,8 +1,8 @@
 class AppStrings {
   // Personal
   static const String name = 'Omar Hammed Ahmed';
-  static const String title = 'Flutter and backend Developer';
-  static const String tagline = 'Focused on the flutter fullstack pipeline';
+  static const String title = 'Full Stack Flutter Developer';
+  static const String tagline = 'Professional at the flutter fullstack pipeline';
   static const String bio =
       'I build mobile and web applications with Flutter — clean architecture,'
       ' solid backends, and experiences that remain stable whenever, wherever .';
