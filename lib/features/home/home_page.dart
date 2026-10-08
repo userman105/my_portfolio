@@ -312,9 +312,10 @@ class _CertificatesSectionState extends State<_CertificatesSection> {
   int _currentPage = 0;
 
   final List<String> _certificates = const [
+    'assets/images/certificates/BachelorDegree.png',
     'assets/images/certificates/DEPI.png',
     'assets/images/certificates/DEPIenglish.png',
-    'assets/images/certificates/BachelorDegree.png',
+
   ];
 
   @override
