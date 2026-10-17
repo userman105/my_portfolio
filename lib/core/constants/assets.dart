@@ -13,7 +13,9 @@ class AppAssets {
   static const String cdlProgress = 'assets/images/cdlaz/progress.png';
   static const String cdlSettings = 'assets/images/cdlaz/settings.png';
 
+  static const  String tetrisFirst= 'assets/images/tetris/tetris.png';
+  static const  String tetrisSecond = 'assets/images/tetris/tetris2.png';
+
   static const String github = 'assets/images/icons/github.png';
   static const String linkedin = 'assets/images/icons/linkedin.png';
-
 }

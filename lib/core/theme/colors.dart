@@ -48,6 +48,9 @@ class AppColors {
   static const Color chipDio     = Color(0xFF881337);
   static const Color chipPDF     = Color(0xFF7F1D1D);
   static const Color chipFirebase= Color(0xFF92400E);
+  static const Color tetrisAccent = Color(0xFFDFC283);
+  static const Color tetrisFrom = Color(0xFFACAF6D);
+  static const Color tetrisTo = Color(0xFF8E8B5E);
   static Color get cyanAccent => Colors.cyanAccent;
   static Color get chronicareFrom => Colors.green;
   static Color get chronicareTo => Colors.greenAccent;

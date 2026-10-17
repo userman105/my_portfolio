@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/strings.dart';
 import '../models/project.dart';
 import '../../core/constants/assets.dart';
 import '../../core/constants/links.dart';
 import '../../core/theme/colors.dart';
 
 class PortfolioRepository {
-  static List<Project> getProjects() => [_chronicare, _cdlAtoZ];
+  static List<Project> getProjects() => [_chronicare, _cdlAtoZ, _tetris];
 
   static final Project _chronicare = Project(
     id: 'chronicare',
@@ -152,6 +153,50 @@ class PortfolioRepository {
       ],
       lessonsLearned:
           'Content quality matters as much as code quality for study apps. I spent significant time verifying question accuracy against official DMV materials. The adaptive review feature was the most impactful addition — users who used it passed at a meaningfully higher rate.',
+    ),
+  );
+  static final Project _tetris = Project(
+    id: 'tetris',
+    title: AppStrings.miniProject, // 'Pass-Time Tetris'
+    subtitle: 'Plain Tetris',
+    githubUrl: AppLinks.tetrisGit,
+    description:
+    'My personal favourite past time while building the apps.',
+    isFeatured: false,
+    accentColor: AppColors.tetrisAccent,
+    gradientFrom: AppColors.tetrisFrom,
+    gradientTo: AppColors.tetrisTo,
+    techStack: [
+      TechChipData(label: 'Flutter', color: const Color(0xFF0553B1)),
+      TechChipData(label: 'Dart', color: const Color(0xFF0175C2)),
+    ],
+    keyFeatures: [
+      'You already know how to play it',
+      'Befriend the Tetrominos',
+      'I think I might add a button that spawns a Hero (I) on demandc',
+      'Increasing difficulty',
+    ],
+    screenshots: [
+      ProjectScreenshot(
+        assetPath: AppAssets.tetrisFirst,
+        caption: 'Gameplay',
+      ),
+      ProjectScreenshot(
+        assetPath: AppAssets.tetrisSecond,
+        caption: 'Game Over',
+      ),
+    ],
+    apkUrl: AppLinks.tetrisApk,
+    demoUrl: AppLinks.tetrisDemo,
+    caseStudy: const CaseStudyData(
+      problem: 'Bored?.',
+      solution: 'TETRIS.',
+      architecture: '1 screen, falling blocks, higher scres .',
+      challenges: [
+        'My personal favourite past time while building the apps.',
+      ],
+      lessonsLearned:
+      'I blow at this game.',
     ),
   );
 }

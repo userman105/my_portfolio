@@ -55,9 +55,6 @@ class PortfolioNav extends StatelessWidget implements PreferredSizeWidget {
             padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 32),
             child: Row(
               children: [
-                // ── Name always top-left ──────────────────────
-                _NameLogo(),
-                const Spacer(),
                 // ── Desktop: inline links | Mobile: hamburger ─
                 if (isMobile)
                   _HamburgerButton(

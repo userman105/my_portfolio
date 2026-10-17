@@ -12,4 +12,9 @@ class AppLinks {
   static const String cdlGithub = 'https://github.com/userman105/cdl-exam-app-flutter-frontend';
   static const String cdlApk = 'https://mega.nz/file/LLpXkbIK#cmqURfcb8kueSGZfqFyn1GdE09SlV9J-qzmqMa3iG3Q';
   static const String cdlDemo = '';
+
+  // Tetris
+  static const String tetrisGit = 'https://github.com/userman105/plain-tetris';
+  static const String tetrisApk = 'https://mega.nz/file/DfAxHKCK#JMW-Dfv41rE58TZv3PB6ZpTttOruNFEC9Z15e6Lxclw';
+  static const String tetrisDemo = '';
 }

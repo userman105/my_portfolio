@@ -5,6 +5,7 @@ import 'dart:ui';
 
 import '../../core/constants/assets.dart';
 import '../../core/constants/links.dart';
+import '../../core/constants/strings.dart';
 import '../../core/theme/colors.dart';
 import '../../data/repositories/portfolio_repository.dart';
 import '../../shared/aero_background.dart';
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   final GlobalKey _chronicareKey = GlobalKey();
   final GlobalKey _cdlKey = GlobalKey();
+  final GlobalKey _tetrisKey = GlobalKey();
 
   final _projects = PortfolioRepository.getProjects();
 
@@ -69,6 +71,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final chronicare = _projects[0];
     final cdlaz = _projects[1];
+    final tetris = _projects[2];
 
     return Scaffold(
       backgroundColor: AppColors.aeroSkyDeep,
@@ -112,6 +115,19 @@ class _HomePageState extends State<HomePage> {
                   child: ProjectCard(
                     project: cdlaz,
                     sectionLabel: 'CDL A to Z',
+                  ),
+                ),
+                ProjectTransitionDivider(
+                  fromAccent: cdlaz.accentColor,
+                  toAccent: tetris.accentColor,
+                  nextProjectTitle: tetris.title,
+                ),
+
+                KeyedSubtree(
+                  key: _tetrisKey,
+                  child: ProjectCard(
+                    project: tetris,
+                    sectionLabel: AppStrings.miniProject,
                   ),
                 ),
 

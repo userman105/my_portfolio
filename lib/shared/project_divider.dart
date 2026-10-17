@@ -2,8 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-/// Aero glass divider between the two project worlds.
-/// A frosted glass strip with a shimmer — like a Vista window chrome separator.
 class ProjectTransitionDivider extends StatelessWidget {
   final Color fromAccent;
   final Color toAccent;

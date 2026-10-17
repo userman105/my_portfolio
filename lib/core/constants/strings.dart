@@ -13,6 +13,7 @@ class AppStrings {
 
   static const String featuredProject = 'ChroniCare';
   static const String secondProject = 'CDL A to Z';
+  static const String miniProject ='Pass-Time Tetris';
   static const String techStack = 'Tech Stack';
   static const String keyFeatures = 'Key Features';
   static const String caseStudy = 'Case Study';

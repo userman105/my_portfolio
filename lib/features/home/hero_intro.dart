@@ -20,7 +20,7 @@ class HeroIntroSection extends StatelessWidget {
     final heroSize = Responsive.heroFontSize(context);
 
     return SizedBox(
-      height: h * 0.82,
+      height: h * 0.65,
       child: Stack(
         children: [
           // Bachelor's degree background.
@@ -29,36 +29,33 @@ class HeroIntroSection extends StatelessWidget {
             right: 0,
             bottom: 0,
             height: isMobile
-                ? h * 0.38
-                : h * 0.48,
+                ? h * 0.50
+                : h * 0.62,
             child: IgnorePointer(
               child: Opacity(
                 opacity: isMobile ? 0.055 : 0.075,
-                child: ClipRect(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    heightFactor: 1.48,
-                    child: Image.asset(
-                      'assets/images/certificates/BachelorsDegree.png',
-                      width: w,
-                      fit: BoxFit.cover,
-                      alignment: Alignment.bottomCenter,
-                      filterQuality: FilterQuality.high,
-                    ),
-                  ),
+                child: Image.asset(
+                  'assets/images/certificates/BachelorsDegree.png',
+                  width: w,
+                  height: isMobile
+                      ? h * 0.50
+                      : h * 0.62,
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.bottomCenter,
+                  filterQuality: FilterQuality.high,
                 ),
               ),
             ),
           ),
 
-          // Soft fade to blend the degree into the hero.
+// Soft fade to blend the degree into the hero.
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
             height: isMobile
-                ? h * 0.40
-                : h * 0.50,
+                ? h * 0.52
+                : h * 0.64,
             child: IgnorePointer(
               child: DecoratedBox(
                 decoration: BoxDecoration(

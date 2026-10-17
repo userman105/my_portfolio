@@ -1,0 +1,239 @@
+Folder PATH listing for volume New Volume
+Volume serial number is 9829-D2D7
+D:.
+|   .flutter-plugins-dependencies
+|   output.txt
+|   pubspec.lock
+|   pubspec.yaml
+|   README.md
+|   
++---.dart_tool
+|   |   package_config.json
+|   |   package_graph.json
+|   |   version
+|   |   
+|   +---dartpad
+|   |       web_plugin_registrant.dart
+|   |       
+|   +---flutter_build
+|   |   \---43b81a46871597f8772afb28c61293cf
+|   |           .filecache
+|   |           app.dill
+|   |           app.dill.deps
+|   |           dart2js.d
+|   |           dart2js.stamp
+|   |           dart2wasm.stamp
+|   |           dart_build.d
+|   |           dart_build.stamp
+|   |           dart_build_result.json
+|   |           flutter_assets.d
+|   |           gen_localizations.stamp
+|   |           main.dart
+|   |           main.dart.js
+|   |           main.dart.js.deps
+|   |           outputs.json
+|   |           service_worker.d
+|   |           web_entrypoint.stamp
+|   |           web_plugin_registrant.dart
+|   |           web_release_bundle.stamp
+|   |           web_resources.d
+|   |           web_service_worker.stamp
+|   |           web_static_assets.stamp
+|   |           web_templated_files.stamp
+|   |           
+|   \---hooks_runner
+|       +---objective_c
+|       |   \---6782ff62a0
+|       |       |   .lock
+|       |       |   dependencies.dependencies_hash_file.json
+|       |       |   hook.dependencies_hash_file.json
+|       |       |   hook.dill
+|       |       |   hook.dill.d
+|       |       |   input.json
+|       |       |   output.json
+|       |       |   stderr.txt
+|       |       |   stdout.txt
+|       |       |   
+|       |       \---out
+|       \---shared
+|           \---objective_c
+|               |   .lock
+|               |   
+|               \---build
+|                   \---6782ff62a0
++---.idea
+|   |   .gitignore
+|   |   misc.xml
+|   |   modules.xml
+|   |   php.xml
+|   |   portfolio.iml
+|   |   vcs.xml
+|   |   workspace.xml
+|   |   
+|   \---libraries
+|           Dart_Packages.xml
+|           Dart_SDK.xml
+|           Flutter_Plugins.xml
+|           
++---assets
+|   \---images
+|       +---cdlaz
+|       |       home.png
+|       |       progress.png
+|       |       quiz.png
+|       |       settings.png
+|       |       study.png
+|       |       
+|       +---certificates
+|       |       BachelorsDegree.png
+|       |       DEPI.PNG
+|       |       DEPIenglish.PNG
+|       |       
+|       +---chronicare
+|       |       dashboard.png
+|       |       login.png
+|       |       ocr.png
+|       |       Profile.png
+|       |       report.png
+|       |       
+|       +---icons
+|       |       github.png
+|       |       linkedin.png
+|       |       
+|       \---tetris
+|               tetris.png
+|               tetris2.png
+|               
++---build
+|   +---native_assets
+|   |   \---web
+|   \---web
+|       |   .last_build_id
+|       |   flutter.js
+|       |   flutter_bootstrap.js
+|       |   flutter_service_worker.js
+|       |   index.html
+|       |   main.dart.js
+|       |   version.json
+|       |   _redirects
+|       |   
+|       +---assets
+|       |   |   AssetManifest.bin
+|       |   |   AssetManifest.bin.json
+|       |   |   FontManifest.json
+|       |   |   NOTICES
+|       |   |   
+|       |   +---assets
+|       |   |   \---images
+|       |   |       +---cdlaz
+|       |   |       |       home.png
+|       |   |       |       progress.png
+|       |   |       |       quiz.png
+|       |   |       |       settings.png
+|       |   |       |       study.png
+|       |   |       |       
+|       |   |       +---certificates
+|       |   |       |       BachelorsDegree.png
+|       |   |       |       DEPI.png
+|       |   |       |       DEPIenglish.png
+|       |   |       |       
+|       |   |       +---chronicare
+|       |   |       |       dashboard.png
+|       |   |       |       login.png
+|       |   |       |       ocr.png
+|       |   |       |       Profile.png
+|       |   |       |       report.png
+|       |   |       |       
+|       |   |       \---icons
+|       |   |               github.png
+|       |   |               linkedin.png
+|       |   |               
+|       |   +---fonts
+|       |   |       MaterialIcons-Regular.otf
+|       |   |       
+|       |   +---packages
+|       |   |   \---font_awesome_flutter
+|       |   |       \---lib
+|       |   |           \---fonts
+|       |   |                   Font-Awesome-7-Brands-Regular-400.otf
+|       |   |                   Font-Awesome-7-Free-Regular-400.otf
+|       |   |                   Font-Awesome-7-Free-Solid-900.otf
+|       |   |                   
+|       |   \---shaders
+|       |           ink_sparkle.frag
+|       |           stretch_effect.frag
+|       |           
+|       \---canvaskit
+|           |   canvaskit.js
+|           |   canvaskit.js.symbols
+|           |   canvaskit.wasm
+|           |   skwasm.js
+|           |   skwasm.js.symbols
+|           |   skwasm.wasm
+|           |   skwasm_heavy.js
+|           |   skwasm_heavy.js.symbols
+|           |   skwasm_heavy.wasm
+|           |   wimp.js
+|           |   wimp.js.symbols
+|           |   wimp.wasm
+|           |   
+|           \---chromium
+|                   canvaskit.js
+|                   canvaskit.js.symbols
+|                   canvaskit.wasm
+|                   
++---lib
+|   |   main.dart
+|   |   
+|   +---core
+|   |   +---constants
+|   |   |       assets.dart
+|   |   |       links.dart
+|   |   |       strings.dart
+|   |   |       
+|   |   +---theme
+|   |   |       app_theme.dart
+|   |   |       colors.dart
+|   |   |       text_styles.dart
+|   |   |       
+|   |   +---utils
+|   |   |       resposive.dart
+|   |   |       
+|   |   \---{constants,theme,utils}
+|   +---data
+|   |   +---models
+|   |   |       project.dart
+|   |   |       
+|   |   +---repositories
+|   |   |       portfolio_repository.dart
+|   |   |       
+|   |   \---{models,repositories}
+|   +---features
+|   |   +---case_study
+|   |   |       case_study_page.dart
+|   |   |       
+|   |   +---home
+|   |   |       hero_intro.dart
+|   |   |       home_page.dart
+|   |   |       portfolio_nav.dart
+|   |   |       
+|   |   +---projects
+|   |   |   |   project_section.dart
+|   |   |   |   
+|   |   |   \---widgets
+|   |   |           project_card.dart
+|   |   |           project_carousel.dart
+|   |   |           tech_chip.dart
+|   |   |           
+|   |   \---{home,projects
+|   |       \---widgets,case_study}
+|   \---shared
+|           aero_background.dart
+|           aero_button.dart
+|           glass_panel.dart
+|           project_divider.dart
+|           
+\---web
+        index.html
+        _redirects
+        
