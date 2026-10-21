@@ -12,6 +12,7 @@ import '../../shared/aero_background.dart';
 import '../../shared/aero_button.dart';
 import '../projects/widgets/tech_chip.dart';
 import '../projects/widgets/project_carousel.dart';
+import '../../core/utils/blur.dart';
 
 class CaseStudyPage extends StatelessWidget {
   final Project project;
@@ -41,7 +42,7 @@ class CaseStudyPage extends StatelessWidget {
               backgroundColor: Colors.transparent,
               flexibleSpace: ClipRect(
                 child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
+                  filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 40), sigmaY: AeroBlur.of(context, 40)),
                   child: Container(
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/theme/colors.dart';
 import '../../core/theme/text_styles.dart';
+import '../core/utils/blur.dart';
 
 /// True Aero glass button — milky white glass with bright rim,
 /// top shine strip, and a colored glow on hover. Exactly like
@@ -66,7 +67,7 @@ class _AeroButtonState extends State<AeroButton> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(6),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+              filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 20), sigmaY: AeroBlur.of(context, 20)),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 150),
                 padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),

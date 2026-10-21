@@ -1196,6 +1196,8 @@ file:///D:/projects/portfolio/lib/core/constants/strings.dart
 file:///D:/projects/portfolio/lib/core/theme/app_theme.dart
 file:///D:/projects/portfolio/lib/core/theme/colors.dart
 file:///D:/projects/portfolio/lib/core/theme/text_styles.dart
+file:///D:/projects/portfolio/lib/core/utils/blur.dart
+file:///D:/projects/portfolio/lib/core/utils/image_warmup.dart
 file:///D:/projects/portfolio/lib/core/utils/resposive.dart
 file:///D:/projects/portfolio/lib/data/models/project.dart
 file:///D:/projects/portfolio/lib/data/repositories/portfolio_repository.dart

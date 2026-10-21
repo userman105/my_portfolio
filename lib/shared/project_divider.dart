@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import '../core/utils/blur.dart';
 
 class ProjectTransitionDivider extends StatelessWidget {
   final Color fromAccent;
@@ -21,7 +22,7 @@ class ProjectTransitionDivider extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+          filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 30), sigmaY: AeroBlur.of(context, 30)),
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 28),
             decoration: BoxDecoration(

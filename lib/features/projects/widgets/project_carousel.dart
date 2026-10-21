@@ -4,6 +4,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../data/models/project.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/theme/text_styles.dart';
+import '../../../core/utils/blur.dart';
 
 class ProjectCarousel extends StatefulWidget {
   final List<ProjectScreenshot> screenshots;
@@ -308,7 +309,7 @@ class _AeroNavBtnState extends State<_AeroNavBtn> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+              filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 16), sigmaY: AeroBlur.of(context, 16)),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 150),
                 width: 38,

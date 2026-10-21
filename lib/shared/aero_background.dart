@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../core/theme/colors.dart';
+import '../core/utils/resposive.dart';
 
 /// True Windows Vista / 7 Aero background:
 /// Rich royal-blue sky gradient with soft cloud-like radial highlights
@@ -21,7 +22,8 @@ class AeroBackground extends StatefulWidget {
 
 class _AeroBackgroundState extends State<AeroBackground>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  late final AnimationController _controller;
+  bool _animating = false;
 
   @override
   void initState() {
@@ -29,7 +31,23 @@ class _AeroBackgroundState extends State<AeroBackground>
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 30),
-    )..repeat();
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // The drifting clouds are subtle, but repainting the sky (and re-blurring
+    // every glass panel on top of it) 60x/second is very costly on phones.
+    // Phones get a static sky; desktops keep the slow animation.
+    final wantAnimation = !Responsive.isMobile(context);
+    if (wantAnimation && !_animating) {
+      _controller.repeat();
+      _animating = true;
+    } else if (!wantAnimation && _animating) {
+      _controller.stop();
+      _animating = false;
+    }
   }
 
   @override
@@ -40,15 +58,26 @@ class _AeroBackgroundState extends State<AeroBackground>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, _) => CustomPaint(
-        painter: _AeroSkyPainter(
-          progress: _controller.value,
-          accentColor: widget.accentColor,
+    // The sky lives in its own RepaintBoundary and the page content is a
+    // sibling, NOT a child of the painter. Before, every animation tick made
+    // the whole page repaint.
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: RepaintBoundary(
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, _) => CustomPaint(
+                painter: _AeroSkyPainter(
+                  progress: _controller.value,
+                  accentColor: widget.accentColor,
+                ),
+              ),
+            ),
+          ),
         ),
-        child: widget.child,
-      ),
+        widget.child,
+      ],
     );
   }
 }

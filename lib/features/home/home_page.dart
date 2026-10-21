@@ -7,6 +7,7 @@ import '../../core/constants/assets.dart';
 import '../../core/constants/links.dart';
 import '../../core/constants/strings.dart';
 import '../../core/theme/colors.dart';
+import '../../core/utils/blur.dart';
 import '../../data/repositories/portfolio_repository.dart';
 import '../../shared/aero_background.dart';
 import '../../shared/project_divider.dart';
@@ -160,10 +161,7 @@ class _AeroFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: 30,
-          sigmaY: 30,
-        ),
+        filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 30), sigmaY: AeroBlur.of(context, 30)),
         child: Container(
           padding: const EdgeInsets.symmetric(
             vertical: 40,
@@ -256,10 +254,7 @@ class _FooterIconState extends State<_FooterIcon> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 16,
-                sigmaY: 16,
-              ),
+              filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 16), sigmaY: AeroBlur.of(context, 16)),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 180),
                 width: 40,
@@ -322,9 +317,9 @@ class _CertificatesSectionState extends State<_CertificatesSection> {
   int _currentPage = 0;
 
   final List<String> _certificates = const [
-    'assets/images/certificates/BachelorsDegree.png',
-    'assets/images/certificates/DEPI.png',
-    'assets/images/certificates/DEPIenglish.png',
+    'assets/images/certificates/bachelorsdegree.webp',
+    'assets/images/certificates/depi.webp',
+    'assets/images/certificates/depienglish.webp',
 
   ];
 
@@ -524,10 +519,7 @@ class _CertificateCardState extends State<_CertificateCard> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(26),
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 25,
-                sigmaY: 25,
-              ),
+              filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 25), sigmaY: AeroBlur.of(context, 25)),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 220),
                 decoration: BoxDecoration(

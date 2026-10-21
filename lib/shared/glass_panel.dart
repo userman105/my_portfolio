@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/theme/colors.dart';
+import '../core/utils/blur.dart';
 
 /// True Windows Vista / 7 Aero Glass panel.
 ///
@@ -42,7 +43,7 @@ class GlassPanel extends StatelessWidget {
     Widget panel = ClipRRect(
       borderRadius: radius,
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
+        filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, blur), sigmaY: AeroBlur.of(context, blur)),
         child: Container(
           width: width,
           height: height,

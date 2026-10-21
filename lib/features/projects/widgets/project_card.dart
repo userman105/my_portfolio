@@ -12,6 +12,7 @@ import '../../../shared/aero_button.dart';
 import 'tech_chip.dart';
 import 'project_carousel.dart';
 import '../../case_study/case_study_page.dart';
+import '../../../core/utils/blur.dart';
 
 class ProjectCard extends StatelessWidget {
   final Project project;
@@ -37,7 +38,7 @@ class ProjectCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(4),
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                    filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 20), sigmaY: AeroBlur.of(context, 20)),
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                       decoration: BoxDecoration(

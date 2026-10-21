@@ -35,7 +35,7 @@ class HeroIntroSection extends StatelessWidget {
               child: Opacity(
                 opacity: isMobile ? 0.055 : 0.075,
                 child: Image.asset(
-                  'assets/images/certificates/BachelorsDegree.png',
+                  'assets/images/certificates/bachelorsdegree.webp',
                   width: w,
                   height: isMobile
                       ? h * 0.50

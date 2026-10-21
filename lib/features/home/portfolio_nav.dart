@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/theme/colors.dart';
 import '../../core/theme/text_styles.dart';
 import '../../core/constants/strings.dart';
+import '../../core/utils/blur.dart';
 
 class PortfolioNav extends StatelessWidget implements PreferredSizeWidget {
   final ScrollController scrollController;
@@ -37,7 +38,7 @@ class PortfolioNav extends StatelessWidget implements PreferredSizeWidget {
 
     return ClipRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
+        filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 40), sigmaY: AeroBlur.of(context, 40)),
         child: Container(
           height: 56,
           decoration: BoxDecoration(
@@ -165,7 +166,7 @@ class _HamburgerButton extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+          filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 20), sigmaY: AeroBlur.of(context, 20)),
           child: Container(
             width: 36, height: 36,
             decoration: BoxDecoration(
@@ -195,7 +196,7 @@ class _MobileNavSheet extends StatelessWidget {
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
+        filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 40), sigmaY: AeroBlur.of(context, 40)),
         child: Container(
           padding: const EdgeInsets.fromLTRB(24, 12, 24, 40),
           decoration: BoxDecoration(

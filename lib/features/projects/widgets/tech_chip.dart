@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../../data/models/project.dart';
 import '../../../core/theme/text_styles.dart';
+import '../../../core/utils/blur.dart';
 
 class TechChip extends StatefulWidget {
   final TechChipData data;
@@ -36,7 +37,7 @@ class _TechChipState extends State<TechChip> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(6),
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 10), sigmaY: AeroBlur.of(context, 10)),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
               decoration: BoxDecoration(

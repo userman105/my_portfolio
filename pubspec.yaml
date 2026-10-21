@@ -29,9 +29,6 @@ flutter:
   assets:
     - assets/images/chronicare/
     - assets/images/cdlaz/
-    - assets/images/icons/
-    - assets/images/icons/
-    - assets/images/certificates/DEPI.png
-    - assets/images/certificates/DEPIenglish.png
-    - assets/images/certificates/BachelorsDegree.png
     - assets/images/tetris/
+    - assets/images/icons/
+    - assets/images/certificates/
