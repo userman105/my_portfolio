@@ -215,12 +215,12 @@ class _InfoPanel extends StatelessWidget {
                 }
               } : null,
             ),
-            AeroButton(
-              label: AppStrings.watchDemo,
-              icon: Icons.play_circle_outline_rounded,
-              accentColor: project.accentColor,
-              onTap: project.demoUrl?.isNotEmpty == true ? () {} : null,
-            ),
+            // AeroButton(
+            //   label: AppStrings.watchDemo,
+            //   icon: Icons.play_circle_outline_rounded,
+            //   accentColor: project.accentColor,
+            //   onTap: project.demoUrl?.isNotEmpty == true ? () {} : null,
+            // ),
           ],
         ).animate().fadeIn(delay: 450.ms, duration: 600.ms),
       ],
