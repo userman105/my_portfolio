@@ -1,0 +1,25 @@
+# Cloudflare Pages: tell browsers to keep static files so repeat visits are instant.
+# (Flutter's own service worker is deprecated and is a stub in your build.)
+
+/assets/assets/images/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/assets/fonts/*
+  Cache-Control: public, max-age=604800
+
+/assets/packages/*
+  Cache-Control: public, max-age=604800
+
+# Engine files rarely change but share names across Flutter upgrades, so keep this short.
+/canvaskit/*
+  Cache-Control: public, max-age=86400
+
+# Entry points must always revalidate so deploys show up immediately.
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/flutter_bootstrap.js
+  Cache-Control: no-cache
+/main.dart.js
+  Cache-Control: no-cache
