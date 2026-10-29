@@ -69338,7 +69338,7 @@ $1(a){return new A.l6(a,null)},
 $S:453}
 A.G6.prototype={
 I(a){var s=null
-return new A.vy(B.Sz,"My Portfolio",A.a5U(B.a0,B.zj,B.bB,A.avF(A.a5U(B.a0,s,s,s,s).ok),!0),!1,B.z0,s)}}
+return new A.vy(B.Sz,"Omar's Portfolio",A.a5U(B.a0,B.zj,B.bB,A.avF(A.a5U(B.a0,s,s,s,s).ok),!0),!1,B.z0,s)}}
 A.Bb.prototype={
 ab(){return new A.PG()},
 gK(){return B.ls}}
