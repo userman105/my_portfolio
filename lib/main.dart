@@ -21,7 +21,7 @@ class PortfolioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My Portfolio',
+      title: 'Omar\'s Portfolio',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.aero,
       home: const _WarmupGate(child: HomePage()),
