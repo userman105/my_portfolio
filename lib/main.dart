@@ -8,8 +8,6 @@ import 'features/home/home_page.dart';
 void main() {
   final binding = WidgetsFlutterBinding.ensureInitialized();
 
-  // Hold the first frame so the HTML loader stays visible while the critical
-  // images are fetched and decoded. ImageWarmup calls allowFirstFrame().
   binding.deferFirstFrame();
 
   runApp(const PortfolioApp());
@@ -30,8 +28,6 @@ class PortfolioApp extends StatelessWidget {
   }
 }
 
-/// Sits below MaterialApp (so precacheImage has a valid context) and kicks
-/// off image warm-up exactly once.
 class _WarmupGate extends StatefulWidget {
   final Widget child;
   const _WarmupGate({required this.child});
