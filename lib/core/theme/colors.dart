@@ -57,4 +57,8 @@ class AppColors {
   static Color get emeraldAccent => Colors.green;
   static Color get cdlFrom => Colors.lightBlueAccent;
   static Color get cdlTo => Colors.blue;
+
+  static const Color chatAccent = Color(0xFFFBBF24);
+  static const Color chatFrom = Color(0xFFF59E0B);
+  static const Color chatTo = Color(0xFFEF4444);
 }

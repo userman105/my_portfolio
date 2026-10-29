@@ -29,6 +29,16 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey _chronicareKey = GlobalKey();
   final GlobalKey _cdlKey = GlobalKey();
   final GlobalKey _tetrisKey = GlobalKey();
+  final GlobalKey _chatKey = GlobalKey();
+
+  late final List<GlobalKey> _sectionKeys =
+  [_chronicareKey, _cdlKey, _tetrisKey, _chatKey];
+
+  /// Index of the project on screen (-1 = hero). Drives the nav pill.
+  final ValueNotifier<int> _activeSection = ValueNotifier<int>(-1);
+
+  /// Stops the pill hopping through every project during a nav-tap scroll.
+  bool _navLock = false;
 
   final _projects = PortfolioRepository.getProjects();
 
@@ -37,6 +47,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
+    _scrollController.addListener(_updateActiveSection);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _startAutoScroll();
@@ -62,8 +74,41 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _updateActiveSection() {
+    if (_navLock || !_scrollController.hasClients) return;
+
+    final limit = MediaQuery.of(context).size.height * 0.45;
+    var active = -1;
+
+    for (var i = 0; i < _sectionKeys.length; i++) {
+      final box =
+      _sectionKeys[i].currentContext?.findRenderObject() as RenderBox?;
+      if (box == null || !box.attached) continue;
+      if (box.localToGlobal(Offset.zero).dy <= limit) active = i;
+    }
+
+    _activeSection.value = active;
+  }
+
+  void _goTo(int i) {
+    final ctx = _sectionKeys[i].currentContext;
+    if (ctx == null) return;
+
+    _autoScrolled = true; // cancel the intro auto-scroll
+    _activeSection.value = i; // the pill slides right away
+    _navLock = true;
+
+    Scrollable.ensureVisible(
+      ctx,
+      duration: const Duration(milliseconds: 450), // Duration.zero = hard jump
+      curve: Curves.easeOutCubic,
+    ).whenComplete(() => _navLock = false);
+  }
+
   @override
   void dispose() {
+    _scrollController.removeListener(_updateActiveSection);
+    _activeSection.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -73,14 +118,40 @@ class _HomePageState extends State<HomePage> {
     final chronicare = _projects[0];
     final cdlaz = _projects[1];
     final tetris = _projects[2];
+    final chat = _projects[3];
 
     return Scaffold(
       backgroundColor: AppColors.aeroSkyDeep,
       extendBodyBehindAppBar: true,
       appBar: PortfolioNav(
-        scrollController: _scrollController,
-        chronicareKey: _chronicareKey,
-        cdlKey: _cdlKey,
+        activeIndex: _activeSection,
+        onSelect: _goTo,
+        items: [
+          NavItem(
+            label: 'ChroniCare',
+            shortLabel: 'ChroniCare',
+            sectionKey: _chronicareKey,
+            accent: AppColors.chronicareAccent,
+          ),
+          NavItem(
+            label: 'CDL A to Z',
+            shortLabel: 'CDL',
+            sectionKey: _cdlKey,
+            accent: AppColors.cdlAccent,
+          ),
+          NavItem(
+            label: 'Tetris',
+            shortLabel: 'Tetris',
+            sectionKey: _tetrisKey,
+            accent: AppColors.tetrisAccent,
+          ),
+          NavItem(
+            label: 'Chat Backend',
+            shortLabel: 'Chat API',
+            sectionKey: _chatKey,
+            accent: AppColors.chatAccent,
+          ),
+        ],
       ),
       body: AeroBackground(
         accentColor: AppColors.chronicareAccent,
@@ -129,6 +200,20 @@ class _HomePageState extends State<HomePage> {
                   child: ProjectCard(
                     project: tetris,
                     sectionLabel: AppStrings.miniProject,
+                  ),
+                ),
+
+                ProjectTransitionDivider(
+                  fromAccent: tetris.accentColor,
+                  toAccent: chat.accentColor,
+                  nextProjectTitle: chat.title,
+                ),
+
+                KeyedSubtree(
+                  key: _chatKey,
+                  child: ProjectCard(
+                    project: chat,
+                    sectionLabel: AppStrings.chatProject,
                   ),
                 ),
 
@@ -637,4 +722,3 @@ class _CarouselButtonState extends State<_CarouselButton> {
     );
   }
 }
-

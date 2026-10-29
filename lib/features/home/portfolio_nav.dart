@@ -1,44 +1,54 @@
+import 'dart:math' as math;
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../core/theme/colors.dart';
 import '../../core/theme/text_styles.dart';
-import '../../core/constants/strings.dart';
 import '../../core/utils/blur.dart';
 
+/// One tab in the nav bar.
+class NavItem {
+  final String label; // desktop
+  final String shortLabel; // mobile (tabs share the full width)
+  final GlobalKey sectionKey;
+  final Color accent;
+
+  const NavItem({
+    required this.label,
+    required this.shortLabel,
+    required this.sectionKey,
+    required this.accent,
+  });
+}
+
+/// Glass nav bar with a pill that slides to whichever project is on screen.
+///
+/// HomePage owns the state: it updates [activeIndex] while scrolling
+/// (scroll-spy) and on tap, and performs the scroll in [onSelect].
 class PortfolioNav extends StatelessWidget implements PreferredSizeWidget {
-  final ScrollController scrollController;
-  final GlobalKey chronicareKey;
-  final GlobalKey cdlKey;
+  final List<NavItem> items;
+  final ValueListenable<int> activeIndex; // -1 = none (hero is showing)
+  final ValueChanged<int> onSelect;
 
   const PortfolioNav({
     super.key,
-    required this.scrollController,
-    required this.chronicareKey,
-    required this.cdlKey,
+    required this.items,
+    required this.activeIndex,
+    required this.onSelect,
   });
 
   @override
   Size get preferredSize => const Size.fromHeight(56);
 
-  void _scrollTo(GlobalKey key) {
-    final ctx = key.currentContext;
-    if (ctx != null) {
-      Scrollable.ensureVisible(
-        ctx,
-        duration: const Duration(milliseconds: 700),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 600;
+    final isMobile = MediaQuery.of(context).size.width < 700;
 
     return ClipRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 40), sigmaY: AeroBlur.of(context, 40)),
+        filter: ImageFilter.blur(
+          sigmaX: AeroBlur.of(context, 40),
+          sigmaY: AeroBlur.of(context, 40),
+        ),
         child: Container(
           height: 56,
           decoration: BoxDecoration(
@@ -53,30 +63,68 @@ class PortfolioNav extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 32),
-            child: Row(
-              children: [
-                // ── Desktop: inline links | Mobile: hamburger ─
-                if (isMobile)
-                  _HamburgerButton(
-                    onChronniCare: () => _scrollTo(chronicareKey),
-                    onCdl: () => _scrollTo(cdlKey),
-                  )
-                else ...[
-                  _NavLink(
-                    label: 'ChroniCare',
-                    accentColor: AppColors.chronicareAccent,
-                    onTap: () => _scrollTo(chronicareKey),
-                  ),
-                  const SizedBox(width: 28),
-                  _NavLink(
-                    label: 'CDL A to Z',
-                    accentColor: AppColors.cdlAccent,
-                    onTap: () => _scrollTo(cdlKey),
-                  ),
-                ],
-              ],
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 12 : 32,
+              vertical: 9,
             ),
+            child: LayoutBuilder(builder: (context, c) {
+              final tabW = isMobile
+                  ? c.maxWidth / items.length
+                  : math.min(132.0, c.maxWidth / items.length);
+
+              return Align(
+                alignment: isMobile ? Alignment.center : Alignment.centerLeft,
+                child: SizedBox(
+                  width: tabW * items.length,
+                  height: 38,
+                  child: ValueListenableBuilder<int>(
+                    valueListenable: activeIndex,
+                    builder: (_, active, __) {
+                      final hasActive = active >= 0 && active < items.length;
+                      return Stack(
+                        children: [
+                          // The sliding pill.
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 380),
+                            curve: Curves.easeOutCubic,
+                            left: (hasActive ? active : 0) * tabW,
+                            top: 0,
+                            bottom: 0,
+                            width: tabW,
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 250),
+                              opacity: hasActive ? 1 : 0,
+                              child: _Indicator(
+                                accent: hasActive
+                                    ? items[active].accent
+                                    : Colors.white,
+                              ),
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              for (var i = 0; i < items.length; i++)
+                                SizedBox(
+                                  width: tabW,
+                                  child: _NavTab(
+                                    label: isMobile
+                                        ? items[i].shortLabel
+                                        : items[i].label,
+                                    accent: items[i].accent,
+                                    active: i == active,
+                                    compact: isMobile,
+                                    onTap: () => onSelect(i),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              );
+            }),
           ),
         ),
       ),
@@ -84,187 +132,91 @@ class PortfolioNav extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class _NameLogo extends StatelessWidget {
+class _Indicator extends StatelessWidget {
+  final Color accent;
+  const _Indicator({required this.accent});
+
   @override
   Widget build(BuildContext context) {
-    return Text(
-      AppStrings.name,
-      style: GoogleFonts.inter(
-        fontSize: 15,
-        fontWeight: FontWeight.w500,
-        color: Colors.white,
-        shadows: const [Shadow(color: Color(0x88000044), offset: Offset(0, 1), blurRadius: 6)],
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      margin: const EdgeInsets.symmetric(horizontal: 3),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            accent.withOpacity(0.38),
+            accent.withOpacity(0.14),
+          ],
+        ),
+        border: Border.all(color: Colors.white.withOpacity(0.55), width: 0.6),
+        boxShadow: [
+          BoxShadow(
+            color: accent.withOpacity(0.35),
+            blurRadius: 14,
+            spreadRadius: -3,
+          ),
+        ],
       ),
     );
   }
 }
 
-class _NavLink extends StatefulWidget {
+class _NavTab extends StatefulWidget {
   final String label;
+  final Color accent;
+  final bool active;
+  final bool compact;
   final VoidCallback onTap;
-  final Color? accentColor;
-  const _NavLink({required this.label, required this.onTap, this.accentColor});
+
+  const _NavTab({
+    required this.label,
+    required this.accent,
+    required this.active,
+    required this.compact,
+    required this.onTap,
+  });
 
   @override
-  State<_NavLink> createState() => _NavLinkState();
+  State<_NavTab> createState() => _NavTabState();
 }
 
-class _NavLinkState extends State<_NavLink> {
+class _NavTabState extends State<_NavTab> {
   bool _hovered = false;
 
   @override
   Widget build(BuildContext context) {
+    final lit = widget.active || _hovered;
+
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: widget.onTap,
-        child: AnimatedDefaultTextStyle(
-          duration: const Duration(milliseconds: 180),
-          style: AppTextStyles.navLink.copyWith(
-            color: _hovered
-                ? (widget.accentColor ?? Colors.white)
-                : Colors.white.withOpacity(0.8),
-            shadows: _hovered
-                ? [Shadow(color: (widget.accentColor ?? Colors.white).withOpacity(0.6), blurRadius: 12)]
-                : [const Shadow(color: Color(0x66000044), offset: Offset(0, 1), blurRadius: 4)],
-          ),
-          child: Text(widget.label),
-        ),
-      ),
-    );
-  }
-}
-
-class _HamburgerButton extends StatelessWidget {
-  final VoidCallback onChronniCare;
-  final VoidCallback onCdl;
-  const _HamburgerButton({required this.onChronniCare, required this.onCdl});
-
-  void _openDrawer(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (_) => _MobileNavSheet(
-        onChronniCare: () {
-          Navigator.pop(context);
-          onChronniCare();
-        },
-        onCdl: () {
-          Navigator.pop(context);
-          onCdl();
-        },
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _openDrawer(context),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 20), sigmaY: AeroBlur.of(context, 20)),
-          child: Container(
-            width: 36, height: 36,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Color(0x40FFFFFF), Color(0x20FFFFFF)],
-              ),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.white.withOpacity(0.4), width: 0.5),
+        child: Center(
+          child: AnimatedDefaultTextStyle(
+            duration: const Duration(milliseconds: 180),
+            style: AppTextStyles.navLink.copyWith(
+              fontSize: widget.compact ? 12 : null,
+              color: widget.active
+                  ? Colors.white
+                  : _hovered
+                      ? widget.accent
+                      : Colors.white.withOpacity(0.78),
+              fontWeight: widget.active ? FontWeight.w600 : null,
+              shadows: lit
+                  ? [Shadow(color: widget.accent.withOpacity(0.6), blurRadius: 10)]
+                  : const [Shadow(color: Color(0x66000044), offset: Offset(0, 1), blurRadius: 4)],
             ),
-            child: Icon(Icons.menu_rounded, color: Colors.white.withOpacity(0.85), size: 18),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _MobileNavSheet extends StatelessWidget {
-  final VoidCallback onChronniCare;
-  final VoidCallback onCdl;
-  const _MobileNavSheet({required this.onChronniCare, required this.onCdl});
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: AeroBlur.of(context, 40), sigmaY: AeroBlur.of(context, 40)),
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(24, 12, 24, 40),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0x55FFFFFF), Color(0x33FFFFFF)],
+            child: Text(
+              widget.label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-            border: Border(top: BorderSide(color: Colors.white.withOpacity(0.65), width: 1)),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Drag handle
-              Container(
-                width: 36, height: 3,
-                margin: const EdgeInsets.only(bottom: 24),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.4),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              _SheetLink(
-                label: 'ChroniCare',
-                accent: AppColors.chronicareAccent,
-                onTap: onChronniCare,
-              ),
-              const SizedBox(height: 4),
-              _SheetLink(
-                label: 'CDL A to Z',
-                accent: AppColors.cdlAccent,
-                onTap: onCdl,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _SheetLink extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-  final Color? accent;
-  const _SheetLink({required this.label, required this.onTap, this.accent});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white.withOpacity(0.06),
-        ),
-        child: Text(
-          label,
-          style: GoogleFonts.inter(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: accent ?? Colors.white.withOpacity(0.85),
-            shadows: accent != null
-                ? [Shadow(color: accent!.withOpacity(0.5), blurRadius: 10)]
-                : null,
           ),
         ),
       ),

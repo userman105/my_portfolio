@@ -17,4 +17,10 @@ class AppLinks {
   static const String tetrisGit = 'https://github.com/userman105/plain-tetris';
   static const String tetrisApk = 'https://mega.nz/file/DfAxHKCK#JMW-Dfv41rE58TZv3PB6ZpTttOruNFEC9Z15e6Lxclw';
   static const String tetrisDemo = '';
+
+  // Real-Time Chat Backend
+  static const String chatGit = 'https://github.com/userman105/Real-Time-Chat-App';
+
+  // Resume (served from web/resume/)
+  static const String resumePath = '/resume/Omar_Hammed_Ahmed_Resume.pdf';
 }

@@ -12,6 +12,7 @@ class AppAssets {
   static const String cdlStudy = 'assets/images/cdlaz/study.webp';
   static const String cdlProgress = 'assets/images/cdlaz/progress.webp';
   static const String cdlSettings = 'assets/images/cdlaz/settings.webp';
+  static const String cdlPlaystore = 'assets/images/cdlaz/playstore.webp';
 
   static const  String tetrisFirst= 'assets/images/tetris/tetris.webp';
   static const  String tetrisSecond = 'assets/images/tetris/tetris2.webp';

@@ -6,7 +6,7 @@ import '../../core/constants/links.dart';
 import '../../core/theme/colors.dart';
 
 class PortfolioRepository {
-  static List<Project> getProjects() => [_chronicare, _cdlAtoZ, _tetris];
+  static List<Project> getProjects() => [_chronicare, _cdlAtoZ, _tetris, _chat];
 
   static final Project _chronicare = Project(
     id: 'chronicare',
@@ -88,7 +88,7 @@ class PortfolioRepository {
 
   static final Project _cdlAtoZ = Project(
     id: 'cdlaz',
-    title: 'CDL A to Z',
+    title: 'CDL A to Z (Freelance)',
     subtitle: 'Commercial Driver License Study App',
     githubUrl: AppLinks.cdlGithub,
     description:
@@ -116,6 +116,11 @@ class PortfolioRepository {
       'Dark mode',
     ],
     screenshots: [
+      ProjectScreenshot(
+        assetPath: AppAssets.cdlPlaystore,
+        caption: 'Play store screen (closed beta)',
+      ),
+
       ProjectScreenshot(
         assetPath: AppAssets.cdlHome,
         caption: 'Home Screen',
@@ -197,6 +202,61 @@ class PortfolioRepository {
       ],
       lessonsLearned:
       'I blow at this game.',
+    ),
+  );
+  static final Project _chat = Project(
+    id: 'chat',
+    title: 'Real-Time Chat',
+    subtitle: 'Implemented with Laravel REST API + Socket.IO Gateway',
+    githubUrl: AppLinks.chatGit,
+    description:
+    'A chat backend split across two services: a Laravel API that owns '
+        'users, chats, membership and message history, and a Node.js '
+        'Socket.IO server , made as a module to support other projects I need'
+        ' it to.',
+    isFeatured: false,
+    isBackend: true,
+    accentColor: AppColors.chatAccent,
+    gradientFrom: AppColors.chatFrom,
+    gradientTo: AppColors.chatTo,
+    techStack: [
+      TechChipData(label: 'Laravel', color: const Color(0xFFF05340)),
+      TechChipData(label: 'PHP', color: const Color(0xFF777BB4)),
+      TechChipData(label: 'Node.js', color: const Color(0xFF339933)),
+      TechChipData(label: 'Express', color: const Color(0xFF404040)),
+      TechChipData(label: 'Socket.IO', color: const Color(0xFF404040)),
+      TechChipData(label: 'WebSockets', color: const Color(0xFF06B6D4)),
+      TechChipData(label: 'REST API', color: const Color(0xFF0EA5E9)),
+      TechChipData(label: 'Token Auth', color: const Color(0xFFF59E0B)),
+      TechChipData(label: 'Insomnia', color: const Color(0xFF4000BF)),
+    ],
+    keyFeatures: [
+      'REST API for chats, members and messages',
+      'Bearer-token authenticated requests',
+      'Join, leave, and admin invite-by-email membership',
+      'User search by email',
+      'Per-user read tracking (messages_read)',
+      'Node + Socket.IO layer for live delivery',
+      'Endpoints exercised end to end in Insomnia',
+    ],
+    screenshots: const [],
+    apkUrl: '',
+    demoUrl: '',
+    caseStudy: const CaseStudyData(
+      problem:
+      'Chat needs durable relational data (accounts, memberships, history) and instant delivery. Forcing one framework to do both well usually means compromising on one of them.',
+      solution:
+      'Split the responsibilities. Laravel owns authentication, the schema and every database write through a REST API. A Node.js server running Socket.IO owns the live connections and fans messages out to chat members.',
+      architecture:
+      'Clients sign in against the Laravel API and receive a bearer token. The same token identifies them to the Node gateway, which pushes new messages to the other members of that chat. Five tables model it: users, chats, a chat_user pivot for membership, messages, and messages_read for read receipts.',
+      challenges: [
+        'Keeping two services in agreement about who a user is, using one token instead of two login systems.',
+        'Modelling many-to-many membership with admin rules for joining, leaving and inviting.',
+        'Tracking read state per user per message without bloating the messages table.',
+        'Testing HTTP and socket flows before a client existed, using Insomnia against every endpoint.',
+      ],
+      lessonsLearned:
+      'Designing the schema and REST contract first, and proving it in Insomnia before adding sockets, keeps the real-time layer thin. Persistence and delivery are different jobs, and separating them made each easier to reason about.',
     ),
   );
 }

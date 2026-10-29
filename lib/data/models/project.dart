@@ -54,6 +54,7 @@ class Project {
   final Color gradientTo;
   final CaseStudyData caseStudy;
   final bool isFeatured;
+  final bool isBackend;
 
   const Project({
     required this.id,
@@ -71,5 +72,6 @@ class Project {
     required this.gradientTo,
     required this.caseStudy,
     this.isFeatured = false,
+    this.isBackend = false,
   });
 }

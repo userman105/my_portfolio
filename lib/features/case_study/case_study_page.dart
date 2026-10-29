@@ -13,6 +13,7 @@ import '../../shared/aero_button.dart';
 import '../projects/widgets/tech_chip.dart';
 import '../projects/widgets/project_carousel.dart';
 import '../../core/utils/blur.dart';
+import '../projects/widgets/backend_diagram.dart';
 
 class CaseStudyPage extends StatelessWidget {
   final Project project;
@@ -115,7 +116,12 @@ class CaseStudyPage extends StatelessWidget {
                         GlassPanel(
                           padding: const EdgeInsets.all(12),
                           glowColor: project.accentColor,
-                          child: ProjectCarousel(
+                          child: project.isBackend
+                              ? BackendDiagram(
+                            accentColor: project.accentColor,
+                            height: Responsive.caseCarouselHeight(context),
+                          )
+                              : ProjectCarousel(
                             screenshots: project.screenshots,
                             accentColor: project.accentColor,
                             height: Responsive.caseCarouselHeight(context),

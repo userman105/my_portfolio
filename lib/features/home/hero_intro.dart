@@ -7,9 +7,18 @@ import '../../core/theme/text_styles.dart';
 import '../../core/constants/strings.dart';
 import '../../core/utils/resposive.dart';
 import '../../shared/glass_panel.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../core/constants/links.dart';
+import '../../core/theme/colors.dart';
+import '../../shared/aero_button.dart';
 
 class HeroIntroSection extends StatelessWidget {
   const HeroIntroSection({super.key});
+
+  Future<void> _openResume() async {
+    final uri = Uri.parse('${Uri.base.origin}${AppLinks.resumePath}');
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,16 +186,19 @@ class HeroIntroSection extends StatelessWidget {
                       duration: 600.ms,
                     ),
 
-                    SizedBox(
-                      height: isMobile ? 40 : 56,
-                    ),
+                    AeroButton(
+                      label: AppStrings.downloadResume,
+                      icon: Icons.download_rounded,
+                      accentColor: AppColors.chronicareAccent,
+                      primary: true,
+                      onTap: _openResume,
+                    ).animate().fadeIn(delay: 700.ms, duration: 600.ms),
+
+                    SizedBox(height: isMobile ? 28 : 40), // was 40 / 56
 
                     _AeroScrollIndicator()
                         .animate()
-                        .fadeIn(
-                      delay: 1000.ms,
-                      duration: 800.ms,
-                    ),
+                        .fadeIn(delay: 1000.ms, duration: 800.ms),
                   ],
                 ),
               ),

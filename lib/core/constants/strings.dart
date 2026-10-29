@@ -11,8 +11,8 @@ class AppStrings {
   static const String navAbout = 'About';
   static const String navContact = 'Contact';
 
-  static const String featuredProject = 'ChroniCare';
-  static const String secondProject = 'CDL A to Z';
+  static const String featuredProject = 'ChroniCare (Freelance)';
+  static const String secondProject = 'CDL A to Z (Freelance)';
   static const String miniProject ='Pass-Time Tetris';
   static const String techStack = 'Tech Stack';
   static const String keyFeatures = 'Key Features';
@@ -28,4 +28,9 @@ class AppStrings {
   static const String challengesTitle = 'Challenges';
   static const String techUsedTitle = 'Technologies Used';
   static const String lessonsTitle = 'Lessons Learned';
+
+
+  static const String chatProject = 'Real-Time Chat Backend';
+  static const String downloadResume = 'Download Resume';
+
 }

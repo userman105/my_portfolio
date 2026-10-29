@@ -13,6 +13,7 @@ import 'tech_chip.dart';
 import 'project_carousel.dart';
 import '../../case_study/case_study_page.dart';
 import '../../../core/utils/blur.dart';
+import 'backend_diagram.dart';
 
 class ProjectCard extends StatelessWidget {
   final Project project;
@@ -67,7 +68,12 @@ class ProjectCard extends StatelessWidget {
                       child: GlassPanel(
                         padding: const EdgeInsets.all(8),
                         glowColor: project.accentColor,
-                        child: ProjectCarousel(
+                        child: project.isBackend
+                            ? BackendDiagram(
+                          accentColor: project.accentColor,
+                          height: 780,
+                        )
+                            : ProjectCarousel(
                           screenshots: project.screenshots,
                           accentColor: project.accentColor,
                           height: 780,
@@ -84,7 +90,12 @@ class ProjectCard extends StatelessWidget {
                     GlassPanel(
                       padding: const EdgeInsets.all(8),
                       glowColor: project.accentColor,
-                      child: ProjectCarousel(
+                      child: project.isBackend
+                          ? BackendDiagram(
+                        accentColor: project.accentColor,
+                        height: 640,
+                      )
+                          : ProjectCarousel(
                         screenshots: project.screenshots,
                         accentColor: project.accentColor,
                         height: 640,
@@ -203,13 +214,15 @@ class ProjectCard extends StatelessWidget {
                   ? () => _openUrl(project.githubUrl!)
                   : null,
             ),
-            AeroButton(
-              label: AppStrings.downloadApk,
-              icon: Icons.android_rounded,
-              accentColor: project.accentColor,
-              onTap: project.apkUrl?.isNotEmpty == true
-                  ? () =>_openUrl(project.apkUrl!) : null,
-            ),
+            if (!project.isBackend)
+              AeroButton(
+                label: AppStrings.downloadApk,
+                icon: Icons.android_rounded,
+                accentColor: project.accentColor,
+                onTap: project.apkUrl?.isNotEmpty == true
+                    ? () => _openUrl(project.apkUrl!)
+                    : null,
+              ),
             // AeroButton(
             //   label: AppStrings.watchDemo,
             //   icon: Icons.play_circle_outline_rounded,
