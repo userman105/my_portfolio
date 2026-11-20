@@ -23,3 +23,15 @@
   Cache-Control: no-cache
 /main.dart.js
   Cache-Control: no-cache
+
+# ChroniCare Insights dashboard (static, versioned with ?v=)
+/chronicare/diabetes-insights/data.js
+  Cache-Control: public, max-age=604800
+/chronicare/diabetes-insights/app.js
+  Cache-Control: public, max-age=86400
+/chronicare/diabetes-insights/style.css
+  Cache-Control: public, max-age=86400
+/chronicare/diabetes-insights/
+  Cache-Control: no-cache
+/chronicare/diabetes-insights/index.html
+  Cache-Control: no-cache

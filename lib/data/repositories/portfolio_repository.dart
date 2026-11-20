@@ -68,6 +68,42 @@ class PortfolioRepository {
     ],
     apkUrl: AppLinks.chronicareApk,
     demoUrl: AppLinks.chronicareDemo,
+    insights: const InsightsData(
+      eyebrow: 'COMPANION ANALYTICS',
+      title: 'ChroniCare Insights',
+      blurb:
+          'ChroniCare helps one patient track their own readings. ChroniCare Insights zooms out: an interactive '
+          'explorer of 253,680 CDC survey respondents that shows which of those same readings are linked to '
+          'diabetes across the wider population. Filter by age, sex, education, income and BMI and every chart updates live.',
+      connections: [
+        'Same indicators, two scales: blood pressure, cholesterol, BMI, activity and general health are the kinds of readings a patient tracks in ChroniCare, and the strongest signals in the survey data.',
+        'Same idea of turning raw health data (scanned lab reports in the app, survey rows in the analysis) into something a person can read at a glance.',
+        'Natural next step: bring the trained diabetes-risk model from the analysis into ChroniCare to give a patient context for their own numbers.',
+      ],
+      screenshots: [
+        ProjectScreenshot(
+          assetPath: AppAssets.insightsOverview,
+          caption: 'Overview: KPIs, live filters and age / BMI prevalence',
+        ),
+        ProjectScreenshot(
+          assetPath: AppAssets.insightsRisk,
+          caption: 'Risk factors: high BP x high cholesterol heatmap',
+        ),
+        ProjectScreenshot(
+          assetPath: AppAssets.insightsHealth,
+          caption: 'Physical & mental health: heatmap with metric toggle',
+        ),
+        ProjectScreenshot(
+          assetPath: AppAssets.insightsDemographics,
+          caption: 'Demographics: age, education, income and sex',
+        ),
+      ],
+      dashboardUrl: AppLinks.chronicareInsights,
+      repoUrl: AppLinks.diabetesAnalyticsGithub,
+      note:
+          'Built with plain JavaScript and SVG from the BRFSS 2015 survey file; it runs entirely in the browser. '
+          'Survey answers are self-reported, so the charts show associations, not diagnoses.',
+    ),
     caseStudy: const CaseStudyData(
       problem:
           'Patients with chronic conditions struggle to keep track of lab results across multiple visits and providers. Paper records get lost, digital portals are fragmented, and most apps require constant internet access — a real barrier in areas with poor connectivity.',

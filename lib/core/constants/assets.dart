@@ -6,6 +6,12 @@ class AppAssets {
   static const String chronicareReport = 'assets/images/chronicare/report.webp';
   static const String chronicareProfile = 'assets/images/chronicare/profile.webp';
 
+  // ChroniCare Insights dashboard previews (screenshots of web/chronicare/diabetes-insights)
+  static const String insightsOverview = 'assets/images/chronicare/insights/overview.webp';
+  static const String insightsRisk = 'assets/images/chronicare/insights/risk-factors.webp';
+  static const String insightsHealth = 'assets/images/chronicare/insights/physical-mental.webp';
+  static const String insightsDemographics = 'assets/images/chronicare/insights/demographics.webp';
+
   // CDL A to Z screenshots — add your actual image files to assets/images/cdlaz/
   static const String cdlHome = 'assets/images/cdlaz/home.webp';
   static const String cdlQuiz = 'assets/images/cdlaz/quiz.webp';
@@ -37,6 +43,10 @@ class AppAssets {
     chronicareOcr,
     chronicareReport,
     chronicareProfile,
+    insightsOverview,
+    insightsRisk,
+    insightsHealth,
+    insightsDemographics,
     cdlHome,
     cdlQuiz,
     cdlStudy,

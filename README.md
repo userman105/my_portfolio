@@ -1,6 +1,6 @@
 # Portfolio — Flutter Web
 
-Aero Glass design. Single-page scrollable portfolio for ChroniCare and CDL A to Z.
+Aero Glass design. Single-page scrollable portfolio for ChroniCare and CDL A to Z, plus ChroniCare Insights, an interactive diabetes-risk dashboard that accompanies the ChroniCare case study.
 
 ## Setup
 
@@ -82,4 +82,28 @@ lib/
     projects/    ← FeaturedProjectSection, ProjectCard, Carousel, TechChip
     case_study/  ← CaseStudyPage (full detail page per project)
   shared/        ← GlassPanel, AeroBackground, AeroButton, dividers
+web/chronicare/diabetes-insights/   ← static interactive dashboard (see below)
+tools/           ← build_insights_data.py (regenerates the dashboard data)
 ```
+
+## ChroniCare Insights (interactive dashboard)
+
+A companion to the ChroniCare case study. ChroniCare tracks one patient's readings; **ChroniCare Insights** zooms out to
+253,680 CDC BRFSS 2015 survey respondents and shows which of the same indicators (blood pressure, cholesterol, BMI,
+activity, general health) are linked to diabetes. It is built from the analysis in
+[Project-Project-3-Healthcare-Predictive-Analytics-Project](https://github.com/userman105/Project-Project-3-Healthcare-Predictive-Analytics-Project).
+
+- **Live page:** `/chronicare/diabetes-insights/` (opened from the ChroniCare case study and the featured project's **Insights** button).
+- **Source:** `web/chronicare/diabetes-insights/` (`index.html`, `app.js`, `style.css`, `data.js`). Plain JavaScript and SVG, no
+  dependencies and no build step. `flutter build web` copies `web/` into `build/web/` unchanged.
+- **Interactivity:** filter by age, sex, education, income and BMI (chips, or click a bar / slice); four pages (Overview, Risk
+  factors, Physical & mental health, Demographics); every KPI, chart, heatmap and insight sentence recomputes from the filtered data.
+- **Data:** `data.js` packs the survey into ~117k unique respondent combinations with counts (~0.9 MB). Regenerate it with
+  `python tools/build_insights_data.py path/to/diabetes_012_health_indicators_BRFSS2015.csv`.
+- **Flutter integration:** `InsightsData` (`lib/data/models/project.dart`) is attached to the ChroniCare project in
+  `portfolio_repository.dart`; `InsightsPanel` (`lib/features/projects/widgets/insights_panel.dart`) renders it on the case study page.
+  Any other project can get the same block by setting its `insights:` field.
+- **Preview images:** `assets/images/chronicare/insights/*.webp` are screenshots of the dashboard (PNG originals in
+  `web/chronicare/diabetes-insights/preview/`). Retake them if the dashboard changes.
+
+Survey answers are self-reported, so the charts show associations, not diagnoses.

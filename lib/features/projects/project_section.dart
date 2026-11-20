@@ -216,6 +216,14 @@ class _InfoPanel extends StatelessWidget {
                 }
               } : null,
             ),
+            if (project.insights != null)
+              AeroButton(
+                label: 'Insights',
+                icon: Icons.insights_rounded,
+                accentColor: project.accentColor,
+                onTap: () => _openUrl(
+                    Uri.base.resolve(project.insights!.dashboardUrl).toString()),
+              ),
             // AeroButton(
             //   label: AppStrings.watchDemo,
             //   icon: Icons.play_circle_outline_rounded,

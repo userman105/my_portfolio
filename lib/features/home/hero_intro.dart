@@ -32,7 +32,6 @@ class HeroIntroSection extends StatelessWidget {
       height: h * 0.65,
       child: Stack(
         children: [
-          // Bachelor's degree background.
           Positioned(
             left: 0,
             right: 0,

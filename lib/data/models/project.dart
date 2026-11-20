@@ -38,6 +38,30 @@ class CaseStudyData {
   });
 }
 
+/// A companion data-analytics piece attached to a project (e.g. an
+/// interactive dashboard that complements an app).
+class InsightsData {
+  final String eyebrow;
+  final String title;
+  final String blurb;
+  final List<String> connections;
+  final List<ProjectScreenshot> screenshots;
+  final String dashboardUrl;
+  final String repoUrl;
+  final String note;
+
+  const InsightsData({
+    required this.eyebrow,
+    required this.title,
+    required this.blurb,
+    required this.connections,
+    required this.screenshots,
+    required this.dashboardUrl,
+    required this.repoUrl,
+    required this.note,
+  });
+}
+
 class Project {
   final String id;
   final String title;
@@ -55,6 +79,7 @@ class Project {
   final CaseStudyData caseStudy;
   final bool isFeatured;
   final bool isBackend;
+  final InsightsData? insights;
 
   const Project({
     required this.id,
@@ -73,5 +98,6 @@ class Project {
     required this.caseStudy,
     this.isFeatured = false,
     this.isBackend = false,
+    this.insights,
   });
 }

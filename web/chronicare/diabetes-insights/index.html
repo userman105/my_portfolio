@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChroniCare Insights — Diabetes Risk Explorer</title>
+  <meta name="description" content="Interactive explorer of diabetes risk factors in the CDC BRFSS 2015 survey (253,680 respondents). Companion analytics to the ChroniCare health-tracking app.">
+  <meta property="og:title" content="ChroniCare Insights — Diabetes Risk Explorer">
+  <meta property="og:description" content="Filter 253,680 survey respondents by age, sex, education, income and BMI and see how diabetes prevalence changes.">
+  <meta name="theme-color" content="#062B6E">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap">
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <div class="bg" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i></div>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="title">
+        <span class="eyebrow">CHRONICARE INSIGHTS</span>
+        <h1>Diabetes Risk Explorer</h1>
+        <p>CDC BRFSS 2015 &middot; <span id="total-n">253,680</span> survey respondents &middot; click any bar, slice or chip to filter</p>
+      </div>
+      <nav class="links" aria-label="Related links">
+        <a href="/">&larr; Portfolio</a>
+        <a href="https://github.com/userman105/Project-Project-3-Healthcare-Predictive-Analytics-Project" target="_blank" rel="noopener">Analysis repo</a>
+        <a href="https://github.com/userman105/ChroniCareFlutterFront" target="_blank" rel="noopener">ChroniCare app</a>
+      </nav>
+    </header>
+
+    <section class="card filters" aria-label="Filters">
+      <div class="f-head">
+        <strong>Filters</strong>
+        <span id="f-summary" class="muted"></span>
+        <button id="f-toggle" class="btn" type="button" aria-expanded="false" aria-controls="f-groups">Show filters</button>
+        <button id="f-clear" class="btn" type="button">Clear all</button>
+      </div>
+      <div id="f-groups" class="f-groups"></div>
+    </section>
+
+    <nav class="tabs" role="tablist" aria-label="Dashboard pages">
+      <button role="tab" data-tab="overview">Overview</button>
+      <button role="tab" data-tab="risk">Risk factors</button>
+      <button role="tab" data-tab="health">Physical &amp; mental health</button>
+      <button role="tab" data-tab="demo">Demographics</button>
+    </nav>
+
+    <main id="view" tabindex="-1"></main>
+
+    <footer class="foot">
+      <p><strong>How to read this.</strong> Prevalence is the share of respondents in a group who report diabetes (BRFSS code 2); prediabetes is shown separately. Figures are self-reported survey answers, so they show associations, not causes, and are not clinical diagnoses. Age bands follow the BRFSS 5-year age codes (1 = 18-24 &hellip; 13 = 80+) grouped into six bands. Groups with fewer than 100 respondents are flagged in the tooltip.</p>
+      <p>Built as the population-level companion to <a href="https://github.com/userman105/ChroniCareFlutterFront" target="_blank" rel="noopener">ChroniCare</a>, the chronic-condition tracking app: the risk factors explored here (blood pressure, cholesterol, BMI, activity, general health) are the same kinds of readings a patient tracks day to day.</p>
+    </footer>
+  </div>
+
+  <div id="tip" role="tooltip"></div>
+  <script src="data.js?v=1"></script>
+  <script src="app.js?v=1"></script>
+</body>
+</html>

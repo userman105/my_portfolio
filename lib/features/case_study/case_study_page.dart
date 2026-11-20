@@ -14,6 +14,7 @@ import '../projects/widgets/tech_chip.dart';
 import '../projects/widgets/project_carousel.dart';
 import '../../core/utils/blur.dart';
 import '../projects/widgets/backend_diagram.dart';
+import '../projects/widgets/insights_panel.dart';
 
 class CaseStudyPage extends StatelessWidget {
   final Project project;
@@ -162,6 +163,15 @@ class CaseStudyPage extends StatelessWidget {
                           accentColor: project.accentColor,
                         ),
                         const SizedBox(height: 16),
+
+                        // Companion analytics (only projects that define insights)
+                        if (project.insights != null) ...[
+                          InsightsPanel(
+                            data: project.insights!,
+                            accentColor: project.accentColor,
+                          ),
+                          const SizedBox(height: 16),
+                        ],
 
                         // Challenges
                         GlassPanel(

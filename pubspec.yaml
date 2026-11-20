@@ -28,6 +28,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/chronicare/
+    - assets/images/chronicare/insights/
     - assets/images/cdlaz/
     - assets/images/tetris/
     - assets/images/icons/
